@@ -53,7 +53,6 @@ void SceneMain::loadResources() {
 	quad->setVertexData(&data[0], 6);
 	quad->setPrimitiveType(Mesh::TRIANGLES);
 	Meshes.add("quad", quad);
-	Meshes.add("monkey", Mesh::loadFromFile("data/meshes/monkey.obj"));
 
 	//textures
 	char pixels[4] = {char(200), char(20), char(20), char(255)};
