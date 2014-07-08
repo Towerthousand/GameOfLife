@@ -19,8 +19,10 @@
 *.exe
 *.out
 *.app
-
 GameOfLife
 
 # Autosave files
 *~
+
+#QT Configurations
+*.user
