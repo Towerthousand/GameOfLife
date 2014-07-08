@@ -1,7 +1,7 @@
 #include "DeferredLight.hpp"
 #include "DeferredContainer.hpp"
 
-DeferredLight::DeferredLight() : pos(vec3f(0,0,-5)), color(1.0f), radius(30.0f), renderer((DeferredContainer*)getGame()->getObjectByName("deferred")) {
+DeferredLight::DeferredLight() : pos(vec3f(0,0,-5)), color(1.0f), radius(20.0f), renderer((DeferredContainer*)getGame()->getObjectByName("deferred")) {
 	quad.mesh = Meshes.get("quad");
 	quad.program = Programs.get("deferredLight");
 }

@@ -14,7 +14,6 @@ class BlurContainer : public ContainerObject {
 		RenderTarget* horitzontalBlurred;
 		RenderTarget* blurred;
 		mutable Model quad;
-	private:
 };
 
 #endif // BLURCONTAINER_HPP

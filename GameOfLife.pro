@@ -8,6 +8,7 @@ SOURCES += main.cpp \
 	SceneMain/DeferredLight.cpp \
 	SceneMain/BlurContainer.cpp \
         SceneMain/Player.cpp \
+    SceneMain/Simulation.cpp
 
 HEADERS += \
 	commons.hpp \
@@ -16,6 +17,7 @@ HEADERS += \
 	SceneMain/DeferredLight.hpp \
 	SceneMain/BlurContainer.hpp \
         SceneMain/Player.hpp \
+    SceneMain/Simulation.hpp
 
 OTHER_FILES += \
 	data/shaders/light.frag \
@@ -23,9 +25,9 @@ OTHER_FILES += \
 	data/shaders/blurPassHoritzontal.frag \
 	data/shaders/blurMaskPass.frag \
 	data/shaders/quad.frag \
-	data/shaders/depth.frag \
-	data/shaders/depth.vert \
 	data/shaders/standardDeferred.vert \
 	data/shaders/standardDeferred.frag \
 	data/shaders/ambientPass.frag \
-        data/shaders/debug.frag
+    data/shaders/simulation.frag \
+    data/shaders/passthrough.vert \
+    data/shaders/MVP.vert

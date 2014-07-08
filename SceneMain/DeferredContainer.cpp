@@ -48,7 +48,6 @@ void DeferredContainer::draw() const {
 
 	//AMBIENT LIGHT
 	quad.program = Programs.get("ambientPass");
-	quad.program->uniform("MVP")->set(mat4f(1.0f));
 	quad.program->uniform("color0")->set(getColor0());
 	quad.program->uniform("color1")->set(getColor1());
 	quad.program->uniform("depth")->set(getDepth());
