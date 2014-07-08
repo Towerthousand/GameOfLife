@@ -1,24 +1,26 @@
-#include "Player.hpp"
+#include "SimScreen.hpp"
 #include "DeferredContainer.hpp"
+#include "Simulation.hpp"
 
-Player::Player() : cam(nullptr), pos(0.0f), renderer(nullptr) {
+SimScreen::SimScreen() : pos(0.0f), renderer(nullptr), sim(nullptr) {
 	renderer = (DeferredContainer*) getGame()->getObjectByName("deferred");
-	model.program = Programs.get("deferredModel");
-	model.mesh = Meshes.get("monkey");
-	cam = new Camera("playerCam",vec3f(0,0,20));
-	cam->projection = glm::perspective(60.0f, float(Environment::getScreen()->getWidth())/float(Environment::getScreen()->getHeight()), 0.1f, 10000.0f);
-	cam->addTo(renderer);
+	sim = new Simulation(100,100);
+	sim->addTo(this);
+	model.program = Programs.get("simDeferred");
+	model.mesh = Meshes.get("quad");
 }
 
-Player::~Player() {
+SimScreen::~SimScreen() {
 }
 
-void Player::update(float deltaTime) {
+void SimScreen::update(float deltaTime) {
 	(void) deltaTime;
 	transform = glm::translate(mat4f(1.0f), pos);
+	transform = glm::scale(transform, vec3f(5.0f));
 }
 
-void Player::draw() const {
+void SimScreen::draw() const {
+	Camera* cam = (Camera*)getGame()->getObjectByName("playerCam");
 	if(renderer->getMode() != DeferredContainer::Deferred) return;
 	model.program->uniform("MVP")->set(cam->projection*cam->getView()*fullTransform);
 	model.program->uniform("M")->set(fullTransform);
@@ -26,5 +28,6 @@ void Player::draw() const {
 	model.program->uniform("ambient")->set(0.1f);
 	model.program->uniform("specular")->set(1.0f);
 	model.program->uniform("diffuseTex")->set(Textures2D.get("nullWhite"));
+	model.program->uniform("simTex")->set(sim->getSimTex());
 	model.draw();
 }

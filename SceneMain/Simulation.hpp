@@ -8,6 +8,7 @@ class Simulation : public GameObject {
 		~Simulation();
 
 		void update(float deltaTime);
+		Texture2D* getSimTex();
 
 	private:
 		Model model;

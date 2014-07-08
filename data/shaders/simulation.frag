@@ -1,7 +1,7 @@
 #version 420
 
-out float finalColor;
+out vec4 finalColor;
 
 void main(void) {
-    finalColor = 1.0f;
+    finalColor = vec4(1.0f,0.0f,0.0f,1.0f);
 }

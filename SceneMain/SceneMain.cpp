@@ -3,6 +3,7 @@
 #include "BlurContainer.hpp"
 #include "DeferredLight.hpp"
 #include "Player.hpp"
+#include "SimScreen.hpp"
 
 SceneMain::SceneMain() : debugCounter(0.0f), fpsCount(0) {
 	this->setName("SCENE");
@@ -32,6 +33,9 @@ SceneMain::SceneMain() : debugCounter(0.0f), fpsCount(0) {
 	DeferredLight* dl = new DeferredLight();
 	dl->pos = vec3f(3.0f,3.0f,10.0f);
 	dl->addTo(renderer);
+
+	SimScreen* ss = new SimScreen();
+	ss->addTo(renderer);
 }
 
 SceneMain::~SceneMain() {
@@ -43,11 +47,16 @@ SceneMain::~SceneMain() {
 void SceneMain::loadResources() {
 	//meshes
 	std::vector<Vertex::Element> elems = {
-		Vertex::Element(Vertex::Attribute::Position, Vertex::Element::Float, 3)
+		Vertex::Element(Vertex::Attribute::Position, Vertex::Element::Float, 3),
+		Vertex::Element(Vertex::Attribute::Normal, Vertex::Element::Float, 3)
 	};
 	std::vector<vec3f> data = {
-		vec3f(1, -1, 0), vec3f(1, 1, 0), vec3f(-1, 1, 0),
-		vec3f(-1, 1, 0), vec3f(-1, -1, 0), vec3f(1, -1, 0)
+		vec3f(1, -1, 0), vec3f(0, 0, 1),
+		vec3f(1, 1, 0), vec3f(0, 0, 1),
+		vec3f(-1, 1, 0), vec3f(0, 0, 1),
+		vec3f(-1, 1, 0), vec3f(0, 0, 1),
+		vec3f(-1, -1, 0), vec3f(0, 0, 1),
+		vec3f(1, -1, 0), vec3f(0, 0, 1)
 	};
 	Mesh* quad = Mesh::loadEmpty(Vertex::Format(elems));
 	quad->setVertexData(&data[0], 6);
@@ -69,6 +78,7 @@ void SceneMain::loadResources() {
 
 	//program
 	Programs.add("deferredModel", ShaderProgram::loadFromFile("data/shaders/standardDeferred.vert", "data/shaders/standardDeferred.frag"));
+	Programs.add("simDeferred", ShaderProgram::loadFromFile("data/shaders/standardDeferred.vert", "data/shaders/simulationDeferred.frag"));
 	Programs.add("deferredLight", ShaderProgram::loadFromFile("data/shaders/MVP.vert", "data/shaders/light.frag"));
 	Programs.add("ambientPass", ShaderProgram::loadFromFile("data/shaders/passthrough.vert", "data/shaders/ambientPass.frag"));
 	Programs.add("blurMaskPass", ShaderProgram::loadFromFile("data/shaders/passthrough.vert", "data/shaders/blurMaskPass.frag"));

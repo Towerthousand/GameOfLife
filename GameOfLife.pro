@@ -8,7 +8,8 @@ SOURCES += main.cpp \
 	SceneMain/DeferredLight.cpp \
 	SceneMain/BlurContainer.cpp \
         SceneMain/Player.cpp \
-    SceneMain/Simulation.cpp
+    SceneMain/Simulation.cpp \
+    SceneMain/SimScreen.cpp
 
 HEADERS += \
 	commons.hpp \
@@ -17,7 +18,8 @@ HEADERS += \
 	SceneMain/DeferredLight.hpp \
 	SceneMain/BlurContainer.hpp \
         SceneMain/Player.hpp \
-    SceneMain/Simulation.hpp
+    SceneMain/Simulation.hpp \
+    SceneMain/SimScreen.hpp
 
 OTHER_FILES += \
 	data/shaders/light.frag \
@@ -30,4 +32,5 @@ OTHER_FILES += \
 	data/shaders/ambientPass.frag \
     data/shaders/simulation.frag \
     data/shaders/passthrough.vert \
-    data/shaders/MVP.vert
+    data/shaders/MVP.vert \
+    data/shaders/simulationDeferred.frag
