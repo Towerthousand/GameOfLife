@@ -2,12 +2,15 @@
 
 Simulation::Simulation(int width, int height) : simTarget(nullptr), WIDTH(width), HEIGHT(height), current(0) {
 	setName("simulation");
-	textures[0] = Texture2D::createEmpty(WIDTH,HEIGHT,Texture::RGBA8);
-	textures[1] = Texture2D::createEmpty(WIDTH,HEIGHT,Texture::RGBA8);
-	simTarget = new RenderTarget();
+	for(int i = 0; i < 2; ++i) {
+		if(i != 0) textures[i] = Texture2D::createEmpty(WIDTH,HEIGHT,Texture::RGB8);
+		else textures[i] = Texture2D::createFromFile("data/inputs/accornglider.png",Texture::RGBA,Texture::UNSIGNED_BYTE,Texture::RGB8);
+		textures[i]->setFilter(GL_NEAREST, GL_NEAREST);
+	}
+	simTarget = new RenderTarget(WIDTH, HEIGHT);
 	simTarget->addCustomTexture(RenderTarget::COLOR0, textures[1]); //OUTPUT
-	simTarget->build();
-	simTarget->getTextureForAttachment(RenderTarget::COLOR0)->setFilter(GL_NEAREST, GL_NEAREST);
+	simTarget->ensureValid();
+	GL_ASSERT(glClear(GL_COLOR_BUFFER_BIT));
 	model.mesh = Meshes.get("quad");
 	model.program = Programs.get("simulation");
 }
@@ -18,18 +21,21 @@ Simulation::~Simulation() {
 
 void Simulation::update(float deltaTime) {
 	(void) deltaTime;
-	//model.program->uniform("inputTex")->set(textures[current]);
-	RenderTarget* curr = RenderTarget::getCurrent();
-	RenderTarget::bind(simTarget);
-	model.draw();
-	RenderTarget::bind(curr);
-	simTarget->destroy();
+	if(!Environment::getKeyboard()->isKeyHeld(Keyboard::Return)) return;
+	model.program->uniform("input")->set(textures[current]);
 	current = (current+1)%2;
 	simTarget->setCustomTexture(RenderTarget::COLOR0, textures[current]);
-	simTarget->build();
+	model.program->uniform("width")->set(WIDTH);
+	model.program->uniform("height")->set(HEIGHT);
+	RenderTarget* curr = RenderTarget::getCurrent();
+	RenderTarget::bind(simTarget);
+	GL_ASSERT(glBlendFunc(GL_ONE,GL_ONE));
+	GL_ASSERT(glClear(GL_COLOR_BUFFER_BIT));
+	model.draw();
+	RenderTarget::bind(curr);
 }
 
 Texture2D*Simulation::getSimTex() {
-	return textures[1];
+	return textures[current];
 }
 

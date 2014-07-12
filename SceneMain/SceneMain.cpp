@@ -48,19 +48,19 @@ void SceneMain::loadResources() {
 	//meshes
 	std::vector<Vertex::Element> elems = {
 		Vertex::Element(Vertex::Attribute::Position, Vertex::Element::Float, 3),
-		Vertex::Element(Vertex::Attribute::Normal, Vertex::Element::Float, 3)
+		Vertex::Element(Vertex::Attribute::Normal, Vertex::Element::Float, 3),
+		Vertex::Element(Vertex::Attribute::TexCoord, Vertex::Element::Float, 2)
 	};
-	std::vector<vec3f> data = {
-		vec3f(1, -1, 0), vec3f(0, 0, 1),
-		vec3f(1, 1, 0), vec3f(0, 0, 1),
-		vec3f(-1, 1, 0), vec3f(0, 0, 1),
-		vec3f(-1, 1, 0), vec3f(0, 0, 1),
-		vec3f(-1, -1, 0), vec3f(0, 0, 1),
-		vec3f(1, -1, 0), vec3f(0, 0, 1)
+	struct Vert { vec3f p; vec3f n; vec2f t;};
+	std::vector<Vert> data = {
+		{ vec3f(-1, -1, 0), vec3f(0, 0, 1), vec2f(0,0)},
+		{ vec3f(1, -1, 0), vec3f(0, 0, 1), vec2f(1,0)},
+		{ vec3f(-1, 1, 0), vec3f(0, 0, 1), vec2f(0,1)},
+		{ vec3f(1, 1, 0), vec3f(0, 0, 1), vec2f(1,1)}
 	};
 	Mesh* quad = Mesh::loadEmpty(Vertex::Format(elems));
 	quad->setVertexData(&data[0], 6);
-	quad->setPrimitiveType(Mesh::TRIANGLES);
+	quad->setPrimitiveType(Mesh::TRIANGLE_STRIP);
 	Meshes.add("quad", quad);
 	Meshes.add("monkey", Mesh::loadFromFile("data/meshes/monkey.obj"));
 
@@ -85,7 +85,7 @@ void SceneMain::loadResources() {
 	Programs.add("blurPassVertical", ShaderProgram::loadFromFile("data/shaders/passthrough.vert", "data/shaders/blurPassVertical.frag"));
 	Programs.add("blurPassHoritzontal", ShaderProgram::loadFromFile("data/shaders/passthrough.vert", "data/shaders/blurPassHoritzontal.frag"));
 	Programs.add("textureToScreen", ShaderProgram::loadFromFile("data/shaders/passthrough.vert", "data/shaders/quad.frag"));
-	Programs.add("simulation", ShaderProgram::loadFromFile("data/shaders/passthrough.vert", "data/shaders/simulation.frag"));
+	Programs.add("simulation", ShaderProgram::loadFromFile("data/shaders/textured.vert", "data/shaders/simulation.frag"));
 }
 
 void SceneMain::update(float deltaTime) {

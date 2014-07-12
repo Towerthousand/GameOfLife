@@ -9,13 +9,9 @@ class Player : public GameObject {
 		~Player();
 
 		void update(float deltaTime);
-		void draw() const;
-
 	private:
-		Model model;
 		Camera* cam;
 		vec3f pos;
-		DeferredContainer* renderer;
 };
 
 #endif // PLAYER_HPP
