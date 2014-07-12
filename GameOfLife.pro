@@ -33,5 +33,4 @@ OTHER_FILES += \
     data/shaders/simulation.frag \
     data/shaders/passthrough.vert \
     data/shaders/MVP.vert \
-    data/shaders/simulationDeferred.frag \
     data/shaders/textured.vert

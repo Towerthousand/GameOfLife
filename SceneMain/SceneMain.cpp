@@ -78,7 +78,6 @@ void SceneMain::loadResources() {
 
 	//program
 	Programs.add("deferredModel", ShaderProgram::loadFromFile("data/shaders/standardDeferred.vert", "data/shaders/standardDeferred.frag"));
-	Programs.add("simDeferred", ShaderProgram::loadFromFile("data/shaders/standardDeferred.vert", "data/shaders/simulationDeferred.frag"));
 	Programs.add("deferredLight", ShaderProgram::loadFromFile("data/shaders/MVP.vert", "data/shaders/light.frag"));
 	Programs.add("ambientPass", ShaderProgram::loadFromFile("data/shaders/passthrough.vert", "data/shaders/ambientPass.frag"));
 	Programs.add("blurMaskPass", ShaderProgram::loadFromFile("data/shaders/passthrough.vert", "data/shaders/blurMaskPass.frag"));

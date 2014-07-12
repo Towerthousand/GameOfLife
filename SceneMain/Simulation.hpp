@@ -4,7 +4,7 @@
 
 class Simulation : public GameObject {
 	public:
-		Simulation(int width, int height);
+		Simulation(std::string inputFile);
 		~Simulation();
 
 		void update(float deltaTime);
@@ -13,8 +13,8 @@ class Simulation : public GameObject {
 	private:
 		Model model;
 		RenderTarget* simTarget;
-		const int WIDTH;
-		const int HEIGHT;
+		int WIDTH;
+		int HEIGHT;
 		Texture2D* textures[2];
 		int current;
 };

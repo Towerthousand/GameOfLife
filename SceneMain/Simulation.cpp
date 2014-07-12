@@ -1,12 +1,12 @@
 #include "Simulation.hpp"
 
-Simulation::Simulation(int width, int height) : simTarget(nullptr), WIDTH(width), HEIGHT(height), current(0) {
+Simulation::Simulation(std::string inputFile) : simTarget(nullptr), current(0) {
 	setName("simulation");
-	for(int i = 0; i < 2; ++i) {
-		if(i != 0) textures[i] = Texture2D::createEmpty(WIDTH,HEIGHT,Texture::RGB8);
-		else textures[i] = Texture2D::createFromFile("data/inputs/accornglider.png",Texture::RGBA,Texture::UNSIGNED_BYTE,Texture::RGB8);
-		textures[i]->setFilter(GL_NEAREST, GL_NEAREST);
-	}
+	textures[0] = Texture2D::createFromFile(inputFile,Texture::RGBA,Texture::UNSIGNED_BYTE,Texture::RGB8);
+	WIDTH = textures[0]->getWidth();
+	HEIGHT = textures[0]->getHeight();
+	textures[1] = Texture2D::createEmpty(WIDTH,HEIGHT,Texture::RGB8);
+	for(int i = 0; i < 2; ++i) textures[i]->setFilter(GL_NEAREST, GL_NEAREST);
 	simTarget = new RenderTarget(WIDTH, HEIGHT);
 	simTarget->addCustomTexture(RenderTarget::COLOR0, textures[1]); //OUTPUT
 	simTarget->ensureValid();
