@@ -3,7 +3,7 @@
 #include "commons.hpp"
 
 class Simulation;
-class DeferredContainer;
+class MotionBlurContainer;
 class SimScreen : public GameObject
 {
 	public:
@@ -16,7 +16,7 @@ class SimScreen : public GameObject
 	private:
 		Model model;
 		vec3f pos;
-		DeferredContainer* renderer;
+		MotionBlurContainer* renderer;
 		Simulation* sim;
 };
 

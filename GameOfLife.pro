@@ -4,33 +4,23 @@ INCLUDEPATH += $$PWD/
 SOURCES += main.cpp \
 	commons.cpp \
 	SceneMain/SceneMain.cpp \
-	SceneMain/DeferredContainer.cpp \
-	SceneMain/DeferredLight.cpp \
-	SceneMain/BlurContainer.cpp \
         SceneMain/Player.cpp \
     SceneMain/Simulation.cpp \
-    SceneMain/SimScreen.cpp
+    SceneMain/SimScreen.cpp \
+    SceneMain/MotionBlurContainer.cpp
 
 HEADERS += \
 	commons.hpp \
 	SceneMain/SceneMain.hpp \
-	SceneMain/DeferredContainer.hpp \
-	SceneMain/DeferredLight.hpp \
-	SceneMain/BlurContainer.hpp \
         SceneMain/Player.hpp \
     SceneMain/Simulation.hpp \
-    SceneMain/SimScreen.hpp
+    SceneMain/SimScreen.hpp \
+    SceneMain/MotionBlurContainer.hpp
 
 OTHER_FILES += \
-	data/shaders/light.frag \
-	data/shaders/blurPassVertical.frag \
-	data/shaders/blurPassHoritzontal.frag \
-	data/shaders/blurMaskPass.frag \
-	data/shaders/quad.frag \
-	data/shaders/standardDeferred.vert \
-	data/shaders/standardDeferred.frag \
-	data/shaders/ambientPass.frag \
     data/shaders/simulation.frag \
     data/shaders/passthrough.vert \
-    data/shaders/MVP.vert \
-    data/shaders/textured.vert
+    data/shaders/texturedNOMVP.vert \
+    data/shaders/texturedMVP.vert \
+    data/shaders/texturedVT.frag \
+    data/shaders/motionBlur.frag

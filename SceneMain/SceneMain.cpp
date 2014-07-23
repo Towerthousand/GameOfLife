@@ -1,7 +1,5 @@
 #include "SceneMain.hpp"
-#include "DeferredContainer.hpp"
-#include "BlurContainer.hpp"
-#include "DeferredLight.hpp"
+#include "MotionBlurContainer.hpp"
 #include "Player.hpp"
 #include "SimScreen.hpp"
 
@@ -21,18 +19,11 @@ SceneMain::SceneMain() : debugCounter(0.0f), fpsCount(0) {
 	glCullFace(GL_BACK);
 	glPointSize(4.0f);
 
-	BlurContainer* blur = new BlurContainer();
-	blur->addTo(this);
-
-	DeferredContainer* renderer = new DeferredContainer();
-	renderer->addTo(blur);
+	MotionBlurContainer* renderer = new MotionBlurContainer();
+    renderer->addTo(this);
 
 	Player* player = new Player();
 	player->addTo(renderer);
-
-	DeferredLight* dl = new DeferredLight();
-	dl->pos = vec3f(3.0f,3.0f,10.0f);
-	dl->addTo(renderer);
 
 	SimScreen* ss = new SimScreen();
 	ss->addTo(renderer);
@@ -77,14 +68,9 @@ void SceneMain::loadResources() {
 	Textures2D.add("nullWhite", Texture2D::createFromRaw(pixels5, 1, 1));
 
 	//program
-	Programs.add("deferredModel", ShaderProgram::loadFromFile("data/shaders/standardDeferred.vert", "data/shaders/standardDeferred.frag"));
-	Programs.add("deferredLight", ShaderProgram::loadFromFile("data/shaders/MVP.vert", "data/shaders/light.frag"));
-	Programs.add("ambientPass", ShaderProgram::loadFromFile("data/shaders/passthrough.vert", "data/shaders/ambientPass.frag"));
-	Programs.add("blurMaskPass", ShaderProgram::loadFromFile("data/shaders/passthrough.vert", "data/shaders/blurMaskPass.frag"));
-	Programs.add("blurPassVertical", ShaderProgram::loadFromFile("data/shaders/passthrough.vert", "data/shaders/blurPassVertical.frag"));
-	Programs.add("blurPassHoritzontal", ShaderProgram::loadFromFile("data/shaders/passthrough.vert", "data/shaders/blurPassHoritzontal.frag"));
-	Programs.add("textureToScreen", ShaderProgram::loadFromFile("data/shaders/passthrough.vert", "data/shaders/quad.frag"));
-	Programs.add("simulation", ShaderProgram::loadFromFile("data/shaders/textured.vert", "data/shaders/simulation.frag"));
+	Programs.add("motionBlur", ShaderProgram::loadFromFile("data/shaders/passthrough.vert", "data/shaders/motionBlur.frag"));
+	Programs.add("textured", ShaderProgram::loadFromFile("data/shaders/texturedMVP.vert", "data/shaders/texturedVT.frag"));
+	Programs.add("simulation", ShaderProgram::loadFromFile("data/shaders/texturedNOMVP.vert", "data/shaders/simulation.frag"));
 }
 
 void SceneMain::update(float deltaTime) {

@@ -7,16 +7,17 @@ class Simulation : public GameObject {
 		Simulation(std::string inputFile);
 		~Simulation();
 
-		void update(float deltaTime);
 		Texture2D* getSimTex();
+		int getCurrentFrame() {return currentFrame;}
+		void setFrame(int frame);
 
+		const int NUM_FRAMES = 60;
 	private:
-		Model model;
-		RenderTarget* simTarget;
-		int WIDTH;
-		int HEIGHT;
-		Texture2D* textures[2];
-		int current;
+		int currentFrame = 0;
+		int WIDTH = 0;
+        int HEIGHT = 0;
+        Texture2D* tex = nullptr;
+        unsigned char* data = nullptr;
 };
 
 #endif // SIMULATION_HPP

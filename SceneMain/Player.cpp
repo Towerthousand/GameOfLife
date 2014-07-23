@@ -1,5 +1,4 @@
 #include "Player.hpp"
-#include "DeferredContainer.hpp"
 
 Player::Player() : cam(nullptr), pos(0.0f) {
 	cam = new Camera("playerCam",vec3f(0,0,20));
