@@ -6,9 +6,9 @@ class Player : public GameObject {
 	public:
 		Player();
 		~Player();
-
-		void update(float deltaTime);
 	private:
+		void update(float deltaTime);
+
 		Camera* cam;
 		vec3f pos;
 };

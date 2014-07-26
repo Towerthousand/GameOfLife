@@ -10,10 +10,10 @@ class SimScreen : public GameObject
 		SimScreen();
 		~SimScreen();
 
+	private:
 		void update(float deltaTime);
 		void draw() const;
 
-	private:
 		Model model;
 		vec3f pos;
 		MotionBlurContainer* renderer;

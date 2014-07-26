@@ -6,12 +6,15 @@ class SceneMain : public GameObject {
 	public:
 		SceneMain();
 		~SceneMain();
-		void update(float deltaTime);
 
 	private:
+		void update(float deltaTime);
 		void loadResources();
+
 		float debugCounter;
 		int fpsCount;
+		SoundBuffer sb;
+		Sound s;
 };
 
 #endif // SCENEMAIN_HPP

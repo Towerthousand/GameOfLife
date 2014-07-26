@@ -7,10 +7,10 @@ class MotionBlurContainer : public ContainerObject {
 		MotionBlurContainer();
 		~MotionBlurContainer();
 
+	private:
 		void update(float deltaTime);
 		void draw() const;
 
-	private:
 		RenderTarget* scene;
 		mutable Model quad;
 };

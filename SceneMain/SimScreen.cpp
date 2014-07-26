@@ -5,12 +5,12 @@
 SimScreen::SimScreen() : pos(0.0f), renderer(nullptr), sim(nullptr) {
 	renderer = (MotionBlurContainer*) getGame()->getObjectByName("deferred");
 	sim = new Simulation("data/inputs/accornglider.png");
-	sim->addTo(this);
 	model.program = Programs.get("textured");
 	model.mesh = Meshes.get("quad");
 }
 
 SimScreen::~SimScreen() {
+	delete sim;
 }
 
 void SimScreen::update(float deltaTime) {

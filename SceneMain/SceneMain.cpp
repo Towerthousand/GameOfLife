@@ -27,6 +27,10 @@ SceneMain::SceneMain() : debugCounter(0.0f), fpsCount(0) {
 
 	SimScreen* ss = new SimScreen();
 	ss->addTo(renderer);
+
+	sb.loadFromFile("data/audio/audio.ogg");
+	s.setBuffer(sb);
+	s.play();
 }
 
 SceneMain::~SceneMain() {

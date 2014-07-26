@@ -2,7 +2,7 @@
 #define SIMULATION_HPP
 #include "commons.hpp"
 
-class Simulation : public GameObject {
+class Simulation {
 	public:
 		Simulation(std::string inputFile);
 		~Simulation();
